@@ -1,0 +1,7 @@
+# Local preview config (points at a machine-specific path)
+.claude/
+
+# OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPHIDIA</title>
+<meta name="description" content="Hand-set diamonds threaded along a single serpentine line of white gold.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Inter:wght@300;400&family=Italiana&family=Syne:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/hero.jpg" imagesrcset="assets/hero-1440.jpg 1440w, assets/hero.jpg 1912w" imagesizes="(max-width: 1023px) 100vh, min(100vw, 1920px)">
+<style>
+  /* Design tokens — values from Figma frame 77:2 "OPHIDIA — Hero + Vault 1440" */
+  :root {
+    --bg: #07070a;
+    --ink: #0a0a0d;
+    --white: #fff;
+    --serif: "Bodoni Moda", "Didot", "Bodoni 72", serif;
+    --sans: "Syne", system-ui, sans-serif;
+    --glyph: "Inter", system-ui, sans-serif;
+    --mono: "Italiana", var(--serif);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; }
+  h1, h2, p { margin: 0; font-weight: 400; }
+  /* 1 design px = 1/1440 of the page width, capped at a 1920 wide layout */
+  .site { container-type: inline-size; overflow: hidden; }
+  .site * { --u: calc(min(100cqw, 1920px) / 1440); }
+  .frame {
+    position: relative;
+    width: calc(1440 * var(--u));
+    height: 100%;
+    margin: 0 auto;
+  }
+  .abs { position: absolute; }
+
+  /* ───────────── HERO ───────────── */
+  .hero {
+    position: relative;
+    height: calc(810 * var(--u));
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .hero__plate {
+    left: 0; top: 0;
+    width: calc(1440 * var(--u));
+    height: calc(810 * var(--u));
+    object-fit: cover;
+  }
+  .hero__scrim-left {
+    left: 0; top: 0;
+    width: calc(620 * var(--u));
+    height: calc(810 * var(--u));
+    background: linear-gradient(to right, rgba(0,0,0,.9), rgba(0,0,0,.45) 55%, rgba(0,0,0,0));
+  }
+  .hero__scrim-bottom {
+    left: 0; top: calc(340 * var(--u));
+    width: calc(1440 * var(--u));
+    height: calc(470 * var(--u));
+    background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.55) 45%, rgba(0,0,0,.92));
+  }
+  .hero__flare {
+    left: calc(430 * var(--u)); top: calc(-370 * var(--u));
+    width: calc(1260 * var(--u));
+    height: calc(800 * var(--u));
+    pointer-events: none;
+  }
+
+  .nav {
+    left: calc(168 * var(--u)); top: calc(30 * var(--u));
+    width: calc(1219 * var(--u));
+    height: calc(34 * var(--u));
+  }
+  .nav__mark {
+    left: 0; top: calc(8 * var(--u));
+    font: 400 calc(15 * var(--u)) var(--glyph);
+    color: rgba(255,255,255,.95);
+  }
+  .nav__link {
+    top: calc(10 * var(--u));
+    font: 400 max(calc(11 * var(--u)), 10px) var(--sans);
+    letter-spacing: .18em;
+    color: rgba(255,255,255,.88);
+    transition: color .2s;
+  }
+  .nav__link:hover, .nav__link:focus-visible { color: var(--white); }
+  .nav__link--collections { left: calc(745 * var(--u)); }
+  .nav__link--atelier     { left: calc(891 * var(--u)); }
+  .nav__link--contact     { left: calc(997 * var(--u)); }
+  .nav__bag {
+    left: calc(1194 * var(--u)); top: calc(7 * var(--u));
+    font: 400 calc(17 * var(--u)) var(--glyph);
+    color: rgba(255,255,255,.9);
+  }
+  .nav__bag::after {
+    content: "";
+    position: absolute;
+    left: calc(16 * var(--u)); top: calc(-3 * var(--u));
+    width: calc(5 * var(--u)); height: calc(5 * var(--u));
+    border-radius: 50%;
+    background: #fad9b8;
+  }
+
+  .rail {
+    left: calc(29 * var(--u)); top: 0;
+    width: calc(60 * var(--u));
+    height: calc(810 * var(--u));
+    border-right: 1px solid rgba(255,255,255,.13);
+  }
+  .rail__mono {
+    left: calc(20 * var(--u)); top: calc(36 * var(--u));
+    font: 400 calc(20 * var(--u)) var(--mono);
+    color: rgba(255,255,255,.95);
+  }
+  .rail__text {
+    left: calc(23 * var(--u));
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font: 400 max(calc(10 * var(--u)), 9px) var(--sans);
+    letter-spacing: .2em;
+    white-space: nowrap;
+  }
+  .rail__text--mail { top: calc(330 * var(--u)); color: rgba(255,255,255,.55); }
+  .rail__text--tel  { top: calc(660 * var(--u)); color: rgba(255,255,255,.4); }
+
+  .headline {
+    left: calc(143 * var(--u)); top: calc(176 * var(--u));
+    width: calc(371 * var(--u));
+    font: 400 calc(58 * var(--u)) / .92 var(--serif);
+    letter-spacing: -.01em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+  .headline span { display: block; }
+  .hero__arrow {
+    left: calc(168 * var(--u)); top: calc(382 * var(--u));
+    font: 400 calc(30 * var(--u)) var(--glyph);
+    color: rgba(255,255,255,.85);
+  }
+  .hero__sub {
+    left: calc(168 * var(--u)); top: calc(456 * var(--u));
+    width: calc(300 * var(--u));
+    font: 400 max(calc(13 * var(--u)), 12px) / 1.6 var(--sans);
+    color: rgba(255,255,255,.62);
+  }
+  .btn {
+    left: calc(506 * var(--u)); top: calc(452 * var(--u));
+    display: flex;
+    align-items: center;
+    gap: calc(12 * var(--u));
+    padding: calc(19 * var(--u)) calc(22 * var(--u)) calc(19 * var(--u)) calc(24 * var(--u));
+    background: var(--white);
+    color: var(--ink);
+    white-space: nowrap;
+    transition: background .25s, color .25s;
+  }
+  .btn__label {
+    font: 500 max(calc(11 * var(--u)), 10px) var(--sans);
+    letter-spacing: .14em;
+  }
+  .btn__arrow { font: 400 max(calc(13 * var(--u)), 12px) var(--glyph); transition: transform .25s; }
+  .btn:hover, .btn:focus-visible { background: var(--ink); color: var(--white); outline: 1px solid rgba(255,255,255,.6); }
+  .btn:hover .btn__arrow { transform: translate(2px, -2px); }
+
+  .wordmark {
+    left: calc(10 * var(--u)); top: calc(587.64 * var(--u));
+    width: calc(1420 * var(--u));
+    font: 400 calc(236 * var(--u)) / 1 var(--serif);
+    letter-spacing: calc(53.2857 * var(--u));
+    text-align: center;
+    color: rgba(255,255,255,.96);
+    user-select: none;
+  }
+
+  /* Glass card — internals measured against its own 300 px Figma width */
+  .venom {
+    left: calc(1087 * var(--u)); top: calc(440 * var(--u));
+    width: calc(300 * var(--u));
+    aspect-ratio: 1;
+    container-type: inline-size;
+    border: 1px solid rgba(255,255,255,.28);
+    background: linear-gradient(133.78deg, rgba(23,31,46,.8) 3.55%, rgba(13,18,28,.42) 67.38%);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+  }
+  .venom * { --c: calc(100cqw / 300); }
+  .venom__gem {
+    position: absolute;
+    left: calc(31.73 * var(--c)); top: calc(61.73 * var(--c));
+    width: calc(104 * var(--c));
+    transform: rotate(8deg);
+  }
+  .venom__arrow {
+    position: absolute;
+    left: calc(229 * var(--c)); top: calc(21 * var(--c));
+    font: 300 calc(40 * var(--c)) var(--glyph);
+    color: rgba(255,255,255,.9);
+    transition: transform .3s;
+  }
+  .venom:hover .venom__arrow { transform: translate(3px, -3px); }
+  .venom__title {
+    position: absolute;
+    left: calc(29 * var(--c)); top: calc(221 * var(--c));
+    width: calc(240 * var(--c));
+    font: 500 calc(25 * var(--c)) / 1 var(--sans);
+    letter-spacing: -.02em;
+  }
+
+  /* ───────────── THE VAULT ───────────── */
+  .vault {
+    position: relative;
+    height: calc(810 * var(--u));
+    background: #050708;
+    overflow: hidden;
+  }
+  .vault__scrim {
+    left: 0; top: 0; right: 0;
+    height: calc(330 * var(--u));
+    background: linear-gradient(to bottom, rgba(3,5,5,.94), rgba(3,5,5,.62) 60%, rgba(3,5,5,0));
+  }
+  .vault__bloom { pointer-events: none; }
+  .vault__bloom--venom {
+    left: calc(-460 * var(--u)); top: calc(100 * var(--u));
+    width: calc(1560 * var(--u)); height: calc(1320 * var(--u));
+  }
+  .vault__bloom--acid {
+    left: calc(560 * var(--u)); top: calc(-480 * var(--u));
+    width: calc(1420 * var(--u)); height: calc(1220 * var(--u));
+  }
+  .eyebrow {
+    left: calc(120 * var(--u)); top: calc(74 * var(--u));
+    font: 500 max(calc(12 * var(--u)), 11px) var(--sans);
+    letter-spacing: .18em;
+    color: rgba(255,255,255,.5);
+  }
+  .vault__title {
+    left: calc(120 * var(--u)); top: calc(108 * var(--u));
+    width: calc(700 * var(--u));
+    font: 400 calc(62 * var(--u)) / 1.06 var(--serif);
+    letter-spacing: -.02em;
+  }
+  .vault__title span { display: block; }
+  .vault__sub {
+    left: calc(830 * var(--u)); top: calc(122 * var(--u));
+    width: calc(470 * var(--u));
+    font: 400 max(calc(14 * var(--u)), 12px) / 1.6 var(--sans);
+    color: rgba(255,255,255,.6);
+  }
+  .vault__grid {
+    left: calc(120 * var(--u)); top: calc(288 * var(--u));
+    display: grid;
+    grid-template-columns: repeat(3, calc(376 * var(--u)));
+    gap: calc(36 * var(--u));
+  }
+
+  /* Vial card — internals measured against its own 376 px Figma width */
+  .vial {
+    --tint: 178,240,199;
+    --ink: #051a12;
+    --ink-rgb: 5,26,18;
+    --arrow-rgb: 13,41,31;
+    position: relative;
+    display: block;
+    aspect-ratio: 376 / 496;
+    container-type: inline-size;
+  }
+  .vial--wormwood { --tint: 204,250,178; --ink: #0a1f08; --ink-rgb: 10,31,8;  --arrow-rgb: 18,46,15; }
+  .vial--sulphur  { --tint: 240,250,163; --ink: #1c1f05; --ink-rgb: 28,31,5;  --arrow-rgb: 41,43,8; }
+  .vial * { --c: calc(100cqw / 376); }
+  .vial__back, .vial__glass {
+    position: absolute;
+    left: 0; right: 0;
+    border-radius: calc(32 * var(--c));
+  }
+  .vial__back {
+    top: 0;
+    height: calc(306 * var(--c));
+    border: 2px solid rgba(255,255,255,.28);
+    background: linear-gradient(144deg, rgba(255,255,255,.26) 21.8%, rgba(255,255,255,.13) 53.4%, rgba(219,235,229,.06) 79.3%);
+    -webkit-backdrop-filter: blur(17px);
+    backdrop-filter: blur(17px);
+  }
+  .vial__glass {
+    top: calc(26 * var(--c));
+    height: calc(470 * var(--c));
+    border: 2px solid rgba(255,255,255,.38);
+    background: linear-gradient(131.8deg, rgba(255,255,255,.62) 23.3%, rgba(var(--tint),.28) 78.9%);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .vial__bottle {
+    position: absolute;
+    left: calc(8 * var(--c)); top: calc(8 * var(--c));
+    width: calc(356 * var(--c));
+    height: calc(292 * var(--c));
+    object-fit: contain;
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+  }
+  .vial__name {
+    position: absolute;
+    left: calc(28 * var(--c)); top: calc(320 * var(--c));
+    width: calc(230 * var(--c));
+    font: 500 calc(24 * var(--c)) / 1.1 var(--sans);
+    letter-spacing: -.02em;
+    color: var(--ink);
+  }
+  .vial__desc {
+    position: absolute;
+    left: calc(28 * var(--c)); top: calc(356 * var(--c));
+    width: calc(228 * var(--c));
+    font: 400 max(calc(13 * var(--c)), 12px) / 1.5 var(--sans);
+    color: rgba(var(--ink-rgb),.8);
+  }
+  .vial__arrow {
+    position: absolute;
+    left: calc(283 * var(--c)); top: calc(364 * var(--c));
+    width: calc(61 * var(--c));
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(255,255,255,.55);
+    border-radius: 50%;
+    background: linear-gradient(138deg, rgba(255,255,255,.62) 23.3%, rgba(255,255,255,.22) 78.9%);
+    font: 400 calc(20 * var(--c)) var(--sans);
+    color: rgba(var(--arrow-rgb),.85);
+    transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  }
+  .vial:hover .vial__glass, .vial:focus-visible .vial__glass { transform: translateY(-6px); }
+  .vial:hover .vial__bottle { transform: scale(1.04) rotate(-1.5deg); }
+  .vial:hover .vial__arrow { transform: rotate(45deg); }
+  .vial:focus-visible { outline: none; }
+  .vial:focus-visible .vial__glass { border-color: var(--white); }
+
+  /* ───────────── Below 1024: stacked layout ───────────── */
+  @media (max-width: 1023px) {
+    .abs { position: relative; left: auto; top: auto; }
+    .frame { width: auto; }
+
+    .hero {
+      height: auto;
+      min-height: 100svh;
+    }
+    .hero .frame {
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
+      padding: 20px 20px 0;
+    }
+    .hero__plate {
+      position: absolute; inset: 0;
+      width: 100%; height: max(56svh, 420px);
+      object-fit: cover;
+      object-position: 68% 30%;
+    }
+    .hero__scrim-left, .hero__flare, .rail, .hero__arrow { display: none; }
+    .hero__scrim-bottom {
+      position: absolute; left: 0; right: 0; top: max(24svh, 180px);
+      width: auto; height: calc(max(56svh, 420px) - max(24svh, 180px) + 2px);
+      background: linear-gradient(to bottom, rgba(7,7,10,0), rgba(7,7,10,.78) 55%, var(--bg));
+    }
+    .nav {
+      width: auto; height: auto;
+      display: flex; align-items: center; gap: 22px;
+    }
+    .nav .abs { position: relative; left: auto; top: auto; }
+    .nav__mark { font-size: 16px; margin-right: auto; }
+    .nav__link { font-size: 10px; }
+    .nav__bag { font-size: 18px; margin-left: 4px; }
+    .nav__bag::after { left: 15px; top: -2px; width: 5px; height: 5px; }
+
+    .headline {
+      width: auto;
+      margin-top: max(40svh, 300px);
+      font-size: clamp(40px, 9cqw, 72px);
+      text-align: left;
+    }
+    .hero__sub {
+      width: auto; max-width: 340px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .btn {
+      align-self: flex-start;
+      margin-top: 24px;
+      gap: 12px;
+      padding: 18px 22px 18px 24px;
+    }
+    .btn__label { font-size: 11px; }
+    .btn__arrow { font-size: 13px; }
+    .venom {
+      align-self: flex-end;
+      width: min(220px, 56cqw);
+      margin-top: 28px;
+      order: 1;
+    }
+    .wordmark {
+      order: 2;
+      width: auto;
+      margin: 18px -20px 0;
+      font-size: 15.6cqw;
+      letter-spacing: .2258em;
+      padding-left: .2258em;
+      line-height: .8;
+      height: .72em;
+      overflow: hidden;
+    }
+
+    .vault { height: auto; }
+    .vault .frame { padding: 72px 20px 64px; }
+    .vault__scrim { position: absolute; }
+    .vault__bloom { position: absolute; }
+    .vault__title {
+      width: auto;
+      margin-top: 18px;
+      font-size: clamp(38px, 8cqw, 62px);
+    }
+    .vault__sub {
+      width: auto; max-width: 470px;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .vault__sub br { display: none; }
+    .vault__grid {
+      margin-top: 44px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+      gap: 28px;
+    }
+    .vault__grid > * { max-width: 420px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="site">
+
+  <header class="hero">
+    <div class="frame">
+      <img class="hero__plate abs" src="assets/hero.jpg" srcset="assets/hero-1440.jpg 1440w, assets/hero.jpg 1912w" sizes="(max-width: 1023px) 100vh, min(100vw, 1920px)" alt="A white snake coiled on black velvet, wearing a diamond pendant and a diamond tennis necklace" width="1440" height="810" fetchpriority="high">
+      <div class="hero__scrim-left abs" aria-hidden="true"></div>
+      <div class="hero__scrim-bottom abs" aria-hidden="true"></div>
+      <img class="hero__flare abs" src="assets/flare.svg" alt="" aria-hidden="true">
+
+      <nav class="nav abs" aria-label="Primary">
+        <a class="nav__mark abs" href="#" aria-label="Ophidia home">✦</a>
+        <a class="nav__link nav__link--collections abs" href="#vault">COLLECTIONS</a>
+        <a class="nav__link nav__link--atelier abs" href="#">ATELIER</a>
+        <a class="nav__link nav__link--contact abs" href="#">CONTACT</a>
+        <a class="nav__bag abs" href="#" aria-label="Bag, 1 item">◇</a>
+      </nav>
+
+      <aside class="rail abs">
+        <span class="rail__mono abs" aria-hidden="true">O</span>
+        <a class="rail__text rail__text--mail abs" href="mailto:info@ophidia.com">INFO@OPHIDIA.COM</a>
+        <a class="rail__text rail__text--tel abs" href="tel:+15550142">+1 555 0142</a>
+      </aside>
+
+      <h1 class="headline abs"><span>She sheds</span> <span>everything</span> <span>but light</span></h1>
+      <span class="hero__arrow abs" aria-hidden="true">↗</span>
+      <p class="hero__sub abs">Hand-set diamonds threaded along a single serpentine line of white gold. Each piece is cast once, then the mould is destroyed.</p>
+      <a class="btn abs" href="#vault"><span class="btn__label">VIEW THE COLLECTION</span><span class="btn__arrow" aria-hidden="true">↗</span></a>
+
+      <p class="wordmark abs" aria-hidden="true">OPHIDIA</p>
+
+      <a class="venom abs" href="#">
+        <img class="venom__gem" src="assets/detail.png" alt="" width="104" height="104">
+        <span class="venom__arrow" aria-hidden="true">↗</span>
+        <span class="venom__title">PURITY IS A KIND OF VENOM</span>
+      </a>
+    </div>
+  </header>
+
+  <section class="vault" id="vault" aria-labelledby="vault-title">
+    <div class="frame">
+      <div class="vault__scrim abs" aria-hidden="true"></div>
+      <img class="vault__bloom vault__bloom--venom abs" src="assets/bloom-venom.svg" alt="" aria-hidden="true">
+      <img class="vault__bloom vault__bloom--acid abs" src="assets/bloom-acid.svg" alt="" aria-hidden="true">
+
+      <p class="eyebrow abs">THE VAULT</p>
+      <h2 class="vault__title abs" id="vault-title"><span>Three collections.</span> <span>One venom.</span></h2>
+      <p class="vault__sub abs">Each vial holds the pigment that tints a single collection.<br> Once the batch is gone, the colour is never mixed again.</p>
+
+      <div class="vault__grid abs">
+        <a class="vial vial--nightshade" href="#">
+          <span class="vial__back" aria-hidden="true"></span>
+          <span class="vial__glass">
+            <img class="vial__bottle" src="assets/bottle-nightshade.png" alt="Faceted crystal decanter filled with deep emerald liquid" loading="lazy">
+            <span class="vial__name">Nightshade</span>
+            <span class="vial__desc">Deep emerald. The darkest batch we pour.</span>
+            <span class="vial__arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <a class="vial vial--wormwood" href="#">
+          <span class="vial__back" aria-hidden="true"></span>
+          <span class="vial__glass">
+            <img class="vial__bottle" src="assets/bottle-wormwood.png" alt="Round glass flask of glowing chlorophyll-green liquid" loading="lazy">
+            <span class="vial__name">Wormwood</span>
+            <span class="vial__desc">Raw chlorophyll green, uncut and loud.</span>
+            <span class="vial__arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+        <a class="vial vial--sulphur" href="#">
+          <span class="vial__back" aria-hidden="true"></span>
+          <span class="vial__glass">
+            <img class="vial__bottle" src="assets/bottle-sulphur.png" alt="Fluted crystal bottle of acid chartreuse liquid" loading="lazy">
+            <span class="vial__name">Sulphur</span>
+            <span class="vial__desc">Acid chartreuse. Gold under warm light.</span>
+            <span class="vial__arrow" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
